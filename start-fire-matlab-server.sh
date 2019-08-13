@@ -1,7 +1,5 @@
 #!/bin/sh
 
-cd /opt/code/matlab-ismrmrd-server/
-
 if [ $# -eq 1 ]; then
     LOG_FILE=${1}
     octave-cli --path "/opt/code/fire-matlab-ismrmrd-server/" --eval "fire_matlab_ismrmrd_server(9002,${LOG_FILE})" &
