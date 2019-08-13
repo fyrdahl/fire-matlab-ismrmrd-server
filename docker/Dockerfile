@@ -14,8 +14,7 @@ RUN apt-get update --quiet && \
     && mkoctfile --mex SocketClose.c \
     && mkoctfile --mex SocketRead.c \
     && mkoctfile --mex SocketWrite.c \
-    && apt-get remove --purge -y git ca-certificates \
-    && apt-get autoremove -y \
+    && apt-get remove -y git ca-certificates \
     && chmod +x /opt/code/fire-matlab-ismrmrd-server/start-fire-matlab-server.sh
 
 CMD ["/opt/code/fire-matlab-ismrmrd-server/start-fire-matlab-server.sh","fire.log"]
