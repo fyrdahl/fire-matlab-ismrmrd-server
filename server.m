@@ -1,25 +1,29 @@
 classdef server < handle
-    % Alexander Fyrdahl, 2019
+    
+    % Created by Alexander Fyrdahl <alexander.fyrdahl@gmail.com>
+    
     properties
         port = [];
         server_socket = [];
         output_socket = [];
+        log = [];
     end
 
     methods
-        function obj = server(port)
-            fprintf('Initializing server on port %d\n', port);
+        function obj = server(port,log)
+            log.info('Initializing server on port %d', port);
             obj.port = port;
+            obj.log = log;
         end
 
         function serve(obj)
-            fprintf('Serving...\n');
+            obj.log.info('Serving...');
             while true
                 try
                     obj.server_socket = ServerSocket(obj.port);
-                    fprintf('Waiting for client to connect to this host on port : %d\n', obj.port);
+                    obj.log.info('Waiting for client to connect to this host on port : %d', obj.port);
                     [obj.output_socket,remote_socket_address] = SocketAccept(obj.server_socket);
-                    fprintf('Accepting connection from: %s\n', remote_socket_address);
+                    obj.log.info('Accepting connection from: %s', remote_socket_address);
                     handle(obj);
                     SocketClose(obj.server_socket);
                     SocketClose(obj.output_socket);
@@ -40,15 +44,16 @@ classdef server < handle
                 conn = connection(obj.output_socket);
                 config = next(conn);
                 parameters = next(conn);
-                image = simplefft.process(conn,config,parameters);
-                fprintf('Image done, sending!\n');
+                image = simplefft.process(conn,config,parameters,obj.log);
+                obj.log.info('Image done, sending!');
                 send_image(conn,image);
                 write_gadget_message_close(conn);
-                fprintf('Sending done!\n');
+                obj.log.info('Sending done!\n');
             catch ME
                 if strcmp(ME.identifier,'Iterator:StopIteration')
                     SocketClose(obj.output_socket);
                 else
+                    obj.log.error(ME);
                     rethrow(ME);
                 end
             end
@@ -59,5 +64,7 @@ classdef server < handle
                 SocketClose(obj.server_socket);
             end
         end
+        
     end
+    
 end

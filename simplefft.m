@@ -1,10 +1,12 @@
 classdef simplefft < handle
-    % Alexander Fyrdahl, 2019
+    
+    % Created by Alexander Fyrdahl <alexander.fyrdahl@gmail.com>
+    
     methods (Static)
 
-        function image = process(conn,config,header)
+        function image = process(conn,config,header,log)
 
-           fprintf('Reconstructing %s\n',config);
+           log.info('Reconstructing %s\n',config);
 
            hdr = ismrmrd.xml.deserialize(header);
            encoding_x = hdr.encoding.encodedSpace.matrixSize.x;

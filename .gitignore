@@ -1,5 +1,8 @@
 *.asv
 *.m~
 *.mex*
+*.class
 *octave-workspace
 *.log
+*.tar*
+*.zip

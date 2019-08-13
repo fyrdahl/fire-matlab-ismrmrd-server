@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /opt/code/matlab-ismrmrd-server/
+cp -R -f /tmp/share/code/* "/opt/code/fire-matlab-ismrmrd-server/"
 
 if [ $# -eq 1 ]; then
     LOG_FILE=${1}

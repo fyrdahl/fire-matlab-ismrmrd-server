@@ -15,6 +15,7 @@ RUN apt-get update --quiet && \
     && mkoctfile --mex SocketRead.c \
     && mkoctfile --mex SocketWrite.c \
     && apt-get remove --purge -y git ca-certificates \
-    && apt-get autoremove -y
+    && apt-get autoremove -y \
+    && chmod +x /opt/code/fire-matlab-ismrmrd-server/start-fire-matlab-server.sh
 
-CMD octave-cli --path "/opt/code/fire-matlab-ismrmrd-server/" --eval "fire_matlab_ismrmrd_server"
+CMD ["/opt/code/fire-matlab-ismrmrd-server/start-fire-matlab-server.sh","fire.log"]

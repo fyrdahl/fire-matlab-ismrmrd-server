@@ -1,5 +1,4 @@
 classdef constants
-    % Alexander Fyrdahl, 2019
     properties(Constant)
         GADGET_MESSAGE_INT_ID_MIN                             =    0;
         GADGET_MESSAGE_CONFIG_FILE                            =    1;

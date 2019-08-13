@@ -4,7 +4,7 @@
 #include <sys/select.h>
 #include <arpa/inet.h>
 
-// Alexander Fyrdahl, 2019
+// Created by Alexander Fyrdahl <alexander.fyrdahl@gmail.com>
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {

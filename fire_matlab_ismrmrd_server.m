@@ -1,20 +1,28 @@
 function fire_matlab_ismrmrd_server(varargin)
     
-    % Alexander Fyrdahl, 2019
+    % Created by Alexander Fyrdahl <alexander.fyrdahl@gmail.com>
+    
     addpath('mex');
-    try
-        if(exist('OCTAVE_VERSION', 'builtin') > 0)
-            javaaddpath('/usr/share/java/xercesImpl.jar');
-            javaaddpath('/usr/share/java/xml-apis.jar');
-        end
+    
+    if(isOctave)
+        javaaddpath('/usr/share/java/xercesImpl.jar');
+        javaaddpath('/usr/share/java/xml-apis.jar');
     end
 
     if nargin < 1
-        port = 9002;
+        port = 9002; 
     else
         port = varargin{1};
     end
+    
+    if nargin < 2
+        logfile = 'fire.log'; 
+    else
+        port = varargin{2};
+    end
 
-    ismrmrd_server = server(port);
+    log = logging.createLog(logfile);
+    ismrmrd_server = server(port,log);
     serve(ismrmrd_server);
+
 end

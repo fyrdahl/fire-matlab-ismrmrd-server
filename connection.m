@@ -1,5 +1,7 @@
 classdef connection < handle
-    % Alexander Fyrdahl, 2019
+    
+    % Created by Alexander Fyrdahl <alexander.fyrdahl@gmail.com>
+    
     properties
         socket
     end
@@ -39,7 +41,6 @@ classdef connection < handle
                 otherwise
                     unknown_message_identifier(identifier);
             end
-
         end
 
         function unknown_message_identifier(identifier)
