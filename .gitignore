@@ -1,0 +1,5 @@
+*.asv
+*.m~
+*.mex*
+*octave-workspace
+*.log
